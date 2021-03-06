@@ -1,6 +1,6 @@
-##语法和API
+## 语法和API
 
-###1.理解ECMAScript和JavaScript的关系
+### 1.理解ECMAScript和JavaScript的关系
 
 ECMAscript到底是什么？它和JavaScript的关系？
 要讲清楚这个问题，需要回顾历史。1996年11月，JavaScript的创造者Netscape公司，决定将JavaScript提交给国际标准化组织ECMA，
@@ -13,7 +13,7 @@ ECMAscript到底是什么？它和JavaScript的关系？
 
 在日常场合，这两个词是可以互换的。
 
-###2.熟练运用es5、es6提供的语法规范
+### 2.熟练运用es5、es6提供的语法规范
 
 es5：https://www.cnblogs.com/liuyinlei/p/6101674.html
 
@@ -21,17 +21,17 @@ es6：
 https://www.jianshu.com/p/acc3197df582
 http://es6.ruanyifeng.com/
 
-###3.熟练掌握JavaScript提供的全局对象（例如Date、Math）、全局函数（例如decodeURI、isNaN）、全局属性（例如Infinity、undefined）
+### 3.熟练掌握JavaScript提供的全局对象（例如Date、Math）、全局函数（例如decodeURI、isNaN）、全局属性（例如Infinity、undefined）
 
 参考书籍：javascript高级程序设计
 
-###4.熟练应用map、reduce、filter 等高阶函数解决问题
+### 4.熟练应用map、reduce、filter 等高阶函数解决问题
 
 参考资料：https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#
 
-###5.setInterval需要注意的点，使用settimeout实现setInterval
+### 5.setInterval需要注意的点，使用settimeout实现setInterval
 
-####setInterval需要注意的点
+#### setInterval需要注意的点
 
 setInterval运行机制
 
@@ -54,7 +54,7 @@ setInterval(function(){
 setIntervel具有累积效应，如果某个操作特别耗时，超过了setInterval的时间间隔，排在后面的操作会被累积起来，
 然后在很短的时间内连续触发，这可能或造成性能问题（比如集中发出ajax请求）。
 
-####使用settimeout实现setInterval
+#### 使用settimeout实现setInterval
 
 timerFun()
 
@@ -72,13 +72,13 @@ function timerFun(){
 
 }
 
-###6.JavaScript提供的正则表达式API、可以使用正则表达式（邮箱校验、URL解析、去重等）解决常见问题
+### 6.JavaScript提供的正则表达式API、可以使用正则表达式（邮箱校验、URL解析、去重等）解决常见问题
 
 JavaScript提供的正则表达式API：https://blog.csdn.net/luyaran/article/details/82462687
 
 js正则大全： https://www.jb51.net/article/43190.htm
 
-###7.JavaScript异常处理的方式，统一的异常处理方案
+### 7.JavaScript异常处理的方式，统一的异常处理方案
 
 参考资料：https://segmentfault.com/a/1190000011481099
 
@@ -149,7 +149,7 @@ promiseObj.catch((exception)=>{
     catch_statements
 })
 
-####统一异常处理
+#### 统一异常处理
 
 代码中抛出的异常，一种是要展示给用户，一种是展示给开发者。
 
