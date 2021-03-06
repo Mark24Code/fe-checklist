@@ -2,24 +2,57 @@
 
 ### 1.理解ECMAScript和JavaScript的关系
 
-ECMAscript到底是什么？它和JavaScript的关系？
-要讲清楚这个问题，需要回顾历史。1996年11月，JavaScript的创造者Netscape公司，决定将JavaScript提交给国际标准化组织ECMA，
-希望这种语言能够成为国际标准。次年，ECMA发布262号标准文件（ECMA-262）的第一版，规定了浏览器脚本语言的标准，并将这种语言成为ECMAScript，这个版本就是1.0版。
-
-该标准从一开始就是针对JavaScript语言制定的，但之所以不叫JavaScript，有两个原因。一是商标，Java是Sun公司的商标，根据授权协议，
-只有Netscape公司可以合法地使用JavaScript这个名字，且JavaScript本身也已经被Netscape公司注册为商标。二是想体现这门语言的制定者是ECMA，
-不是Netscape，这样有利于保证这门语言的开放性和中立性。因此，ECMAScript和JavaScript的关系是，前者是后者的规格（标准），
-后者是前者的一种实现（另外的ECMAScript方言还有Jscript和ActionScript）。
-
-在日常场合，这两个词是可以互换的。
+ECMAScript 是 JavaScript 的规范，JavaScript 是 ECMAScript 的实现。
 
 ### 2.熟练运用es5、es6提供的语法规范
 
-es5：https://www.cnblogs.com/liuyinlei/p/6101674.html
+简单概要
 
-es6：
-https://www.jianshu.com/p/acc3197df582
-http://es6.ruanyifeng.com/
+#### ES6
+
+* let\const
+
+* 箭头函数
+
+* 模板字符串
+
+* 解构
+
+* 模块
+
+* 参数
+    * 默认参数
+    * rest参数
+* 展开参数
+
+* 类
+
+* Maps
+
+* Promises
+
+* Generators
+
+#### ES7
+
+* includes
+
+* 指数操作数
+
+2**3 === 8
+
+#### ES8
+
+* Object.entries()
+
+* async await
+
+
+
+
+[javascript.ruanyifeng](https://javascript.ruanyifeng.com/)
+
+[ES6入门](es6.ruanyifeng.com/#docs/function)
 
 ### 3.熟练掌握JavaScript提供的全局对象（例如Date、Math）、全局函数（例如decodeURI、isNaN）、全局属性（例如Infinity、undefined）
 
@@ -27,7 +60,7 @@ http://es6.ruanyifeng.com/
 
 ### 4.熟练应用map、reduce、filter 等高阶函数解决问题
 
-参考资料：https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#
+
 
 ### 5.setInterval需要注意的点，使用settimeout实现setInterval
 
@@ -35,7 +68,7 @@ http://es6.ruanyifeng.com/
 
 setInterval运行机制
 
-setInterval的运行机制是，将指定的代码移出本次执行，等到下一轮Event Loop时，再检查是否到了指定时间。如果到了，就执行对应的代码；如果不到，就等到再下一轮Event Loop时重新判断。这意味着，setTimeout指定的代码，必须等到本次执行的所有代码都执行完，才会执行。
+setInterval的运行机制是，将指定的代码移出本次执行，等到下一轮Event Loop时，再检查是否到了指定时间。如果到了，就执行对应的代码；如果不到，就等到再下一轮Event Loop时重新判断。这意味着，setInterval指定的代码，必须等到本次执行的所有代码都执行完，才会执行。
 
 每一轮Event Loop时，都会将“任务队列”中需要执行的任务，一次执行完。setTimeout和setInterval都是把任务添加到“任务队列”的尾部。因此，它们实际上要等到当前脚本的所有同步任务执行完，然后再等到本次Event Loop的“任务队列”的所有任务执行完，才会开始执行。由于前面的任务到底需要多少时间执行完，是不确定的，所以没有办法保证，setTimeout和setInterval指定的任务，一定会按照预定时间执行。
 
@@ -54,29 +87,51 @@ setInterval(function(){
 setIntervel具有累积效应，如果某个操作特别耗时，超过了setInterval的时间间隔，排在后面的操作会被累积起来，
 然后在很短的时间内连续触发，这可能或造成性能问题（比如集中发出ajax请求）。
 
+
+
+setInterval 需要注意的点:
+
+在使用 setInterval 方法时，每一次启动都需要对 setInterval 方法返回的值做一个判断，判断是否是空值，若不是空值，则要停止定时器并将值设为空，再重新启动，如果不进行判断并赋值，有可能会造成计时器循环调用，在同等的时间内同时执行调用的代码，并会随着代码的运行时间增加而增加，导致功能无法实现，甚至占用过多资源而卡死奔溃。因此在每一次使用setInterval方法时，都需要进行一次判断。
+
+```jsx
+
+let timer = setInterval(func, 1000)
+// 在其他地方再次用到setInterval(func, 1000)
+if (timer !== null) {
+    clearInterval(timer)
+    timer = null
+}
+timer = setInterval(func, 1000)
+```
+
+
 #### 使用settimeout实现setInterval
 
-timerFun()
-
-function timerFun(){
-
-  //要执行的操作
-
-  var timer=setTimeout(function(){
-
-  timerFun()
-
-  clearTimeout(timer)
-
-  },2000)
-
-}
+```jsx
+setIntervalFunc = () =>{
+  console.log(1) //使用递归
+  setTimeout(setIntervalFunc, 1000);
+};
+setInterval()
+```
 
 ### 6.JavaScript提供的正则表达式API、可以使用正则表达式（邮箱校验、URL解析、去重等）解决常见问题
 
-JavaScript提供的正则表达式API：https://blog.csdn.net/luyaran/article/details/82462687
+邮箱
 
-js正则大全： https://www.jb51.net/article/43190.htm
+```jsx
+function isEmail(emailStr) {
+    return /^[a-zA-Z0-9]+([._-]*[a-zA-Z0-9]*)*@[a-zA-Z0-9]+.[a-zA-Z0-9{2,5}$]/.test(emailStr);
+}
+```
+
+
+```jsx
+function isUrl(urlStr) {
+    return /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\*\+,;=.%]+$/.test(value)
+}
+```
+
 
 ### 7.JavaScript异常处理的方式，统一的异常处理方案
 
